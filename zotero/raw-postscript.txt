@@ -1,0 +1,36 @@
+// Add the following to the Explort -> postscript section in the Better BibTeX configuration in Zotero
+
+if (Translator.BetterTeX) {
+  // --- 1. Category from the subcollection the item is filed in ---
+  var categoryNames = ['ConfPapers', 'TechReports', 'Journals', 'Books', 'Software'];
+  if (zotero.collections && zotero.collections.length) {
+    var found = [];
+    zotero.collections.forEach(function(key) {
+      var coll = Translator.collections[key];
+      if (coll && categoryNames.indexOf(coll.name) !== -1) {
+        found.push(coll.name);
+      }
+    });
+    if (found.length > 0) {
+      tex.add({ name: 'keywords', value: found.join(',') });
+    }
+  }
+
+  // --- 2. Find your name in the author list and highlight it ---
+  var creators = zotero.creators || [];
+  var myIndex = -1;
+  for (var i = 0; i < creators.length; i++) {
+    var c = creators[i];
+    if (c.creatorType !== 'author') continue;
+    var last = (c.lastName || '').toLowerCase();
+    var first = (c.firstName || '').toLowerCase();
+    if (last === 'pohlmann') {
+      myIndex = i + 1;
+      break;
+    }
+  }
+  if (myIndex > 0) {
+    tex.add({ name: 'author+an', value: myIndex + '=highlight;' });
+  }
+}
+
