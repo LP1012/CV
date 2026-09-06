@@ -1,4 +1,4 @@
-manuscript = main
+manuscript = cv
 references = $(wildcard *.bib)
 latexopt   = -halt-on-error -file-line-error
 latexmkopt = -pdf -use-make $(latexopt)
