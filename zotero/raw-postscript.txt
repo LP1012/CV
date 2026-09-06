@@ -1,4 +1,4 @@
-// Add the following to the Explort -> postscript section in the Better BibTeX configuration in Zotero
+// Add the following to the Export -> postscript section in the Better BibTeX configuration in Zotero
 
 if (Translator.BetterTeX) {
   // --- 1. Category from the subcollection the item is filed in ---
